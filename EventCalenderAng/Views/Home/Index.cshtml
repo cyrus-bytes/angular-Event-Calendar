@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="page-header">
+    <h1>Tasks</h1>
+
+</div>
+
+<div ng-app="calApp" ng-controller="calController">
+    <script type="text/ng-template" id="modalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Tasks</h3>
+        </div>
+        <div class="modal-body">
+            <div class="error">{{Message}}</div>
+            <div class="form-group">
+                <label>Task Title </label>
+                <input type="text" ng-model="NewEvent.Title" autofocus class="form-control" required ng-required="true" />
+            </div>
+            <div class="form-group">
+                <label style="text-align:left">Description </label>
+                <textarea ng-model="NewEvent.Description" autofocus class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label style="text-align:left">Location </label>
+                <div angucomplete-alt id="LocationAutocomplete" placeholder="Type location name" pause="100"
+                     selected-object="afterSelectedLocation" local-data="locations" search-fields="Name"
+                     title-field="Name" minlength="0" input-class="form-control" match-class="highlight" initial-value="locationName" >
+
+                </div>
+               
+            </div>
+            <div class="form-group" ng-show="!isNewTask">
+                    <label style="text-align:left">Employee </label>
+                    <div angucomplete-alt id="txtAutocomplete" placeholder="Type employee name" pause="100"
+                         selected-object="afterSelectedEmployee" local-data="employees" search-fields="Name"
+                         title-field="Name" minlength="0" input-class="form-control" match-class="highlight" initial-value="EmployeeName" ng-required="true">
+                    </div>
+                    @*<div ng-show="SelectedEmployee">
+                Selected Employee : {{SelectedEmployee.Name}} - {{SelectedEmployee.EmployeeID}}
+            </div>*@
+</div>
+            <div class="form-group" ng-show="!isNewTask">
+                <label>Time Slot :</label>
+                <span>
+                    {{NewEvent.StartAt}} - {{NewEvent.EndAt}}
+                </span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+            <button class="btn btn-danger" type="button" ng-show="NewEvent.TaskID > 0" ng-click="delete()">Delete </button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
+                    <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1" ng-model="selectedFilter">
+                </div>
+            </div>
+
+            <div class="col-md-6 text-center">
+                <h4>Employees</h4>
+            </div>
+                <table class="table table-striped table-responsive table-hover" id="tbl" data-toggle="tooltip" title="Please select employee to display his tasks!">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody class="member">
+                        <tr class="clickable-row" ng-repeat="p in employees | filter: selectedFilter | startFrom:(currentPage - 1)*5 | limitTo:5 track by $index" ng-click="setCalendar(p)">
+                            <td>{{p.Name}}</td>
+                            <td>{{p.LocationName}}</td>
+                        </tr>
+                        <tr><td colspan="2"><input type="button" class="btn btn-info" value="Show All" ng-click="selectedFilter = ''" /></td></tr>
+                    </tbody>
+                    <tfoot>
+                    <td colspan="6">
+                        <div class="text-center">
+                            <ul class="pagination pg">
+                                <li ng-class="{disabled: currentPage == 1}">
+                                    <a href ng-click="prevPage()">« Prev</a>
+                                </li>
+                                <li ng-repeat="n in getNumber track by $index"
+                                    ng-class="{active: ($index+1) == currentPage}"
+                                    ng-click="setPage($index+1)">
+                                    <a href>{{$index+1}}</a>
+                                </li>
+                                <li ng-class="{disabled: currentPage == getNumber.length}">
+                                    <a href ng-click="nextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    </tfoot>
+                </table>
+            </div>
+       
+    </div>
+    <hr style="margin-top: 0" id="cl" />
+    <div class="row">
+        <div class="col-md-9" ng-show="employeeCalendar.empName">
+            <div>
+                <div align="center" ng-show="employeeCalendar.empName" class="label label-primary lb-lg">
+                    <span style="color: orange">{{employeeCalendar.empName}}</span> Tasks
+                </div>
+            </div>
+            <br />
+            <hr ng-show="employeeCalendar.empName" />
+            <div data-drop="true" jqyoui-droppable="{multiple:true, onDrop: 'drop'}" id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+        </div>
+        <div class="col-md-3 pull-right">
+            <div id='wrap'>
+                <button style="margin-bottom: 3%;" class="btn btn-info pull-right" ng-click="AddTask()">Add new Task</button>
+                
+                <div id='external-events'>
+                    <h4 class="text-center">All Tasks</h4>
+                    <div data-toggle="collapse" data-target="#{{e.id}}556677" class='fc-event text-center' ng-repeat="e in notAssignedTasks | orderBy: 'LocationID' track by e.id" ng-click="setFilter(e.LocationName)" data-id="{{e.id}}" data-locationid="{{e.LocationID}}" data-title="{{e.title}}" data-detail="{{e.description}}" data-drag="true" jqyoui-draggable="{animate: true}" jqyoui-options="{revert: 'invalid'}">
+                        {{e.title}}
+                        <div id="{{e.id}}556677" class="collapse">
+                            <hr />
+                            {{e.LocationName}}
+                            <hr />
+                            {{e.description}}
+                            <hr />
+                            <div>
+                                <button type="button" class="btn btn-sm btn-danger" ng-click="DeleteTask(e.id)">Delete </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+@section scripts{
+<script src="~/Scripts/Calendar/calApp.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tbl').on('click', '.clickable-row', function (event) {
+            $(this).addClass('success').siblings().removeClass('success');
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+    });
+
+</script>
+
+}

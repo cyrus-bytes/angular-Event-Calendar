@@ -1,0 +1,108 @@
+﻿body {
+    /*padding-top: 50px;*/
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+    body {
+        /*margin-top: 40px;*/
+        text-align: center;
+        font-size: 14px;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    }
+
+    #wrap {
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 11%;
+    }
+
+    #external-events {
+        float: left;
+        /*width: 150px;*/
+        width: 100%;
+         padding: 0 10px;
+        border: 1px solid #ccc;
+        background: #eee;
+        text-align: left;
+    }
+
+        #external-events h4 {
+            font-size: 16px;
+            margin-top: 0;
+            padding-top: 1em;
+        }
+
+        #external-events .fc-event {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        #external-events p {
+            margin: 1.5em 0;
+            font-size: 11px;
+            color: #666;
+        }
+
+            #external-events p input {
+                margin: 0;
+                vertical-align: middle;
+            }
+
+    #calendar {
+        float: right;
+        /*width: 900px;*/
+        width: 100%;
+    }
+
+    .table thead th {
+        text-align: center;
+    }
+    .pg li {
+        display: inline;
+    }
+    .lb-lg {
+        font-size: 20px;
+    }
+   
+    .page-header {
+        margin: 0;
+            margin-bottom: 20px;
+    }
