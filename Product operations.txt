@@ -1,0 +1,60 @@
+
+1- product
+2- ProductImages
+3- ProductVideos
+4- Offers
+6- Suppliers
+7- Brands
+8- WishList
+9- SellPrices
+24- Clearance > productId - priceid
+10- Colors
+11- Social > like - rate 
+  - Review
+12- FAQs
+13- Enquiries
+14- DealOfTheDay from - at
+15- Seasons
+16- Countries
+17- Cultures
+18- Customers
+
+21- TaxRate
+22- Info > terms & Con
+23- DeliveryDate > 1-2 days & 3-5 days & 1 week
+  - ScheduleTask
+25- News
+26- MessageTemplate
+  - CustomerCareContacts
+
+27- Discount > IsGeneral - DiscountProductes . (if not general then its for products)
+28- Discount_AppliedToProducts
+29- DiscountUsageHistory > DiscountId - OrderId - CreatedOn
+
+30- GiftCard > CustId
+31- GiftCardType > Product - Discount - FreeShipping
+  - GiftReason > InviteFriend - SignUp - Quiz - - Amount
+32- GiftCardUsageHistory > WithOrderId
+
+33- MemberAwards > CustId 
+34- Quiz
+
+35- ShoppingCart
+36- ShoppingCartDetails
+
+37- Store > CountryID
+38- StoreTransaction
+
+39- InvoiceHeader or name it Order
+40- InvoiceDetails or name it OrderDetails
+41- InvoiceTypes or name it OrderTypes
+
+42- Users
+43- Groups
+  - GroupPrivileges
+
+  - Shipment
+44- ShippingMethod
+45- 
+
+

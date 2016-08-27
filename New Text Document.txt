@@ -1,0 +1,17 @@
+1- Product:
+
+ - Id
+ - Name
+ - BrandId
+ - CategoryId
+ - brief
+ - Details
+ - sellPrice
+ - DiscountPrice
+ - DiscountPercent
+ - AvailableQuantity
+ - CreationDate
+ - Evaluate
+ - Notes
+ - SupplierId
+ - 
