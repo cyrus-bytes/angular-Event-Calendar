@@ -1,0 +1,36 @@
+
+
+                //        // get product
+
+                //        var product = db.Products.Where(a=>a.Id==1).Select(al=>al).FirstOrDefault();
+
+                //        // get product keys and values
+                //        var keys = db.SpecsKeys.Where(a => a.CatId == product.CatId && a.IsMultiValues != true).ToList();
+
+                //        var keyValuList = new List<Specs>();
+
+                //        foreach (var k in keys)
+                //        {
+                //            var firstOrDefault = db.SpecsValues.FirstOrDefault(a => a.KeyId == k.Id);
+                //            if (firstOrDefault != null)
+                //                keyValuList.Add(new Specs()
+                //                {
+                //                    KeyId = k.Id,
+                //                    Key = k.Name,
+                //                    Value = firstOrDefault.Value
+                //                });
+                //        }
+
+                //        var mvkeys = db.SpecsKeys.Where(a => a.CatId == product.CatId && a.IsMultiValues == true).ToList();
+                //        var proMv = product.ProductMvSpecs.ToList();
+
+                //       foreach (var v in proMv)
+                //        {
+                //            keyValuList.Add(new Specs()
+                //            {
+                //                KeyId = v.SpecsKey.Id,
+                //                Key = v.SpecsKey.Name,
+                //                Value = v.MultiValue.Name
+                //            });
+                //          //var vk = v.MultiValue.SpecsKey.Name;
+                //        }
